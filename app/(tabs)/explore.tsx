@@ -1,15 +1,24 @@
 import {
-  StyleSheet, Image, Platform, View, Text, TouchableOpacity, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, ScrollView,
-} from 'react-native';
-import { ThemedText } from '@/components/ThemedText';
-import { TextInput } from 'react-native-paper';
-import { useState } from 'react';
-import {  useRouter } from 'expo-router';
+  StyleSheet,
+  Image,
+  Platform,
+  View,
+  Text,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
+  ScrollView,
+} from "react-native";
+import { ThemedText } from "@/components/ThemedText";
+import { TextInput } from "react-native-paper";
+import { useState } from "react";
+import { useNavigation, useRouter } from "expo-router";
 
 export default function TabTwoScreen() {
-  const [name, setName] = useState("")
-  const [password, setPassword] = useState("")
-  const [email, setEmail] = useState("")
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const router = useRouter();
   const [errors, setErrors] = useState({ name: "", email: "", password: "" });
 
@@ -41,14 +50,7 @@ export default function TabTwoScreen() {
     setErrors(newErrors);
     return valid;
   };
-
-  // ✅ Handle Form Submission
-  const handleSubmit = () => {
-    if (validateForm()) {
-      router.push("/Sample");
-    }
-  };
-
+  const navigation = useNavigation();
 
   return (
     <KeyboardAvoidingView
@@ -57,86 +59,89 @@ export default function TabTwoScreen() {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>
-
-
           <View style={styles.registerationContainer}>
             <ThemedText style={styles.title}>Registeration</ThemedText>
             <Text style={styles.label}>Name</Text>
-            <TextInput style={styles.input}
-              placeholder='Enter your name'
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your name"
               value={name}
-              onChangeText={setName}>
-            </TextInput>
-            {errors.name ? <Text style={styles.errorText}>{errors.name}</Text> : null}
+              onChangeText={setName}
+            ></TextInput>
+            {errors.name ? (
+              <Text style={styles.errorText}>{errors.name}</Text>
+            ) : null}
 
             <Text style={styles.label}>Email</Text>
-            <TextInput style={styles.input}
-              placeholder='email'
+            <TextInput
+              style={styles.input}
+              placeholder="email"
               value={email}
               onChangeText={setEmail}
-            >
-            </TextInput>
-            {errors.email ? <Text style={styles.errorText}>{errors.email}</Text> : null}
+            ></TextInput>
+            {errors.email ? (
+              <Text style={styles.errorText}>{errors.email}</Text>
+            ) : null}
 
             <Text style={styles.label}>Password</Text>
-            <TextInput style={styles.input}
-              placeholder='password'
+            <TextInput
+              style={styles.input}
+              placeholder="password"
               value={password}
               onChangeText={setPassword}
               secureTextEntry={true}
-              autoCapitalize='none'
-            >
-            </TextInput>
-            {errors.password ? <Text style={styles.errorText}>{errors.password}</Text> : null}
+              autoCapitalize="none"
+            ></TextInput>
+            {errors.password ? (
+              <Text style={styles.errorText}>{errors.password}</Text>
+            ) : null}
 
-
-            <TouchableOpacity style={styles.button}
-              onPress={handleSubmit}
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate("Example" as never)}
             >
               <Text style={styles.buttonLabel}>Sumbit</Text>
-
             </TouchableOpacity>
           </View>
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     // alignItems: "center",
-    // justifyContent:"center",   
+    // justifyContent:"center",
     padding: 50,
     paddingLeft: 20,
     paddingRight: 20,
     backgroundColor: "#f5f5f5",
   },
-  inner: {
-  },
+  inner: {},
 
   registerationContainer: {
     width: "100%",
-    padding: 10,
+    padding: 50,
     backgroundColor: "#fff",
     borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     elevation: 2,
-
   },
   title: {
     fontSize: 20,
     paddingTop: 20,
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
+    color: "#000000",
   },
   label: {
     marginTop: 20,
     fontSize: 20,
-    paddingLeft: 5
+    paddingLeft: 5,
   },
   input: {
     marginTop: 10,
@@ -155,11 +160,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     fontSize: 20,
-    color: "white"
+    color: "white",
   },
   errorText: {
     color: "red",
     fontSize: 14,
     marginBottom: 5,
   },
-})
+});

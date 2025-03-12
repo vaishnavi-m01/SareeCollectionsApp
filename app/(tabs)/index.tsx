@@ -38,8 +38,8 @@ const LoginScreen = () => {
            placeholder="Enter Password"
            value={password}
            onChangeText={setPassword}
-           secureTextEntry={true} // Hides the password
-           autoCapitalize="none" // Prevents automatic capitalization
+           secureTextEntry={true} 
+           autoCapitalize="none" 
         />
 
         <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate("Example" as never)}>
@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 20,
+    color:"#000000"
   },
   label: {
     fontSize: 16,
