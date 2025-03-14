@@ -1,5 +1,7 @@
 import React from "react";
-import { Text, View, StyleSheet, FlatList, Image } from "react-native";
+import { Text, View, StyleSheet, FlatList, Image, ScrollView } from "react-native";
+import CardExample from "../components/home/CardExample";
+import HomeScreens from "../components/home/HomeScreens";
 
 const products = [
     { id: "1", name: "T-Shirt", price: "$20", image: "https://via.placeholder.com/100" },
@@ -9,6 +11,7 @@ const products = [
 
 const Shop = () => {
     return (
+        <ScrollView>
         <View style={styles.container}>
             <Text style={styles.header}>Welcome to the Shop 🛒</Text>
             <FlatList
@@ -22,7 +25,17 @@ const Shop = () => {
                     </View>
                 )}
             />
+            <CardExample/>
+            <View>
+                <HomeScreens/>
+                <HomeScreens/>
+                <HomeScreens/>
+
+
+            </View>
+
         </View>
+        </ScrollView>
     );
 };
 
