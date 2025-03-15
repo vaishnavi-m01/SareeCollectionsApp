@@ -5,24 +5,23 @@ import { white } from "react-native-paper/lib/typescript/styles/themes/v2/colors
 const NativeCard = () => {
   return (
     <View style={styles.container}>
-        <View style={styles.card}>
-      <Image
-        source={{ uri: "https://source.unsplash.com/random" }}
-        style={styles.image}
-      />
-      <Text style={styles.title}>React Native Card</Text>
-      <Text style={styles.description}>This is a simple card example in React Native.</Text>
+      <View style={styles.card}>
+        <Image
+          source={{ uri: "https://source.unsplash.com/random" }}
+          style={styles.image}
+        />
+        <Text style={styles.title}>React Native Card</Text>
+        <Text style={styles.description}>
+          This is a simple card example in React Native.
+        </Text>
+      </View>
     </View>
-
-    </View>
-  
   );
 };
 
 const styles = StyleSheet.create({
-  container:{
-    backgroundClip: "white"
-
+  container: {
+    backgroundClip: "white",
   },
   card: {
     width: 300,

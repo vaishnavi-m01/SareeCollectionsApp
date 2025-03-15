@@ -1,24 +1,27 @@
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
 
-const Register = () => {
+const Login = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const router = useRouter();
+
   const handleRegister = () => {
-    if (!name || !email || !password) {
-      Alert.alert("Error", "All fields are required!");
-      return;
-    }
-    Alert.alert("Success", `Welcome, ${name}!`);
-    console.log({ name, email, password });
+    router.replace("/(tabs)");
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Register</Text>
-
       <TextInput
         style={styles.input}
         placeholder="Name"
@@ -52,7 +55,7 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
 
 const styles = StyleSheet.create({
   container: {

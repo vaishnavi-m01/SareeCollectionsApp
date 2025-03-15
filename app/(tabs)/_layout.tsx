@@ -1,6 +1,6 @@
 import { Tabs } from "expo-router";
-import React from "react";
-import { Platform } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Platform, Keyboard } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import { HapticTab } from "@/components/HapticTab";
@@ -11,6 +11,21 @@ import { IconSymbol } from "@/components/ui/IconSymbol";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener("keyboardDidShow", () =>
+      setKeyboardVisible(true)
+    );
+    const keyboardDidHideListener = Keyboard.addListener("keyboardDidHide", () =>
+      setKeyboardVisible(false)
+    );
+
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
 
   return (
     <Tabs
@@ -19,15 +34,11 @@ export default function TabLayout() {
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            position: "absolute",
-          },
-          default: {},
-        }),
-        tabBarItemStyle: {
-          // paddingVertical: 40,
-          // paddingHorizontal: 40,
+        tabBarStyle: {
+          position: "absolute",
+          height: 60,
+          backgroundColor: "#fff",
+          display: isKeyboardVisible ? "none" : "flex", // Hide tab bar when keyboard appears
         },
       }}
     >
