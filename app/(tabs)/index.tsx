@@ -14,6 +14,22 @@ import {
 import HomeScreens from "../components/home/HomeScreens";
 import Navbar from "../components/home/Navbar";
 import HomeContents from "../components/home/HomeContents";
+import HomeCard from "../components/home/HomeCard";
+
+const cardsarees = [
+  {
+    id: 1,
+    image: "/image/homeImg1.png",
+    name: "Elegant Red Silk Saree with Gold Border",
+    price: "2,499",
+  },
+  {
+    id: 1,
+    image: "/image/cardImg1.png",
+    name: "Elegant Red Silk Saree with Gold Border",
+    price: "2,499",
+  },
+];
 
 const LoginScreen = () => {
   return (
@@ -26,7 +42,7 @@ const LoginScreen = () => {
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={styles.container}
         >
-          <View style={styles.container} >
+          <View style={styles.container}>
             <HomeContents />
           </View>
           {/* Shop Carousel  container */}
@@ -35,10 +51,14 @@ const LoginScreen = () => {
             <Text style={styles.shopTitle}>Shop</Text>
 
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <AntDesign name="left" size={25} color="white" style={styles.CarouelIcon} />
+              <AntDesign
+                name="left"
+                size={15}
+                color="white"
+                style={styles.CarouelIcon}
+              />
 
               <View style={styles.carouselItem}>
-
                 <Image
                   style={styles.carouselImage}
                   source={require("../../assets/images/homeCarouselImg1.png")}
@@ -55,28 +75,37 @@ const LoginScreen = () => {
               <View style={styles.carouselItem}>
                 <Image
                   style={styles.carouselImage}
-                  source={require("../../assets/images/homeCarouselImg2.png")}
+                  source={require("../../assets/images/homeCarouselImg3.png")}
                 />
-                <Text style={styles.carouselText}>Kanchipuram</Text>
+                <Text style={styles.carouselText}>Chettinad</Text>
               </View>
               <View style={styles.carouselItem}>
                 <Image
                   style={styles.carouselImage}
-                  source={require("../../assets/images/homeCarouselImg2.png")}
+                  source={require("../../assets/images/homeCarouselImg4.png")}
                 />
-                <Text style={styles.carouselText}>Kanchipuram</Text>
+                <Text style={styles.carouselText}>Kumbakon</Text>
               </View>
-
+              <AntDesign
+                name="right"
+                size={15}
+                color="white"
+                style={styles.CarouelIcon}
+              />
             </ScrollView>
           </View>
 
-
+          {cardsarees.map((saree, index) => (
+            <HomeCard
+              id={saree.id}
+              image={saree.image}
+              name={saree.name}
+              price={saree.price}
+            />
+          ))}
         </KeyboardAvoidingView>
       </ScrollView>
-
     </View>
-
-
   );
 };
 
@@ -96,9 +125,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginHorizontal: 10,
     backgroundSize: "conver",
-    backgroundRepeat: "no-repeat"
-
-
+    backgroundRepeat: "no-repeat",
   },
   homeImage: {
     width: 300,
@@ -109,11 +136,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 15,
   },
-  heroTitle: {
-    // fontSize: 20,
-    fontWeight: "bold",
-    color: "#fff",
-  },
+
   shopNowButton: {
     marginTop: 10,
     borderRadius: 5,
@@ -125,33 +148,32 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
   },
   shopTitle: {
-    fontSize: 22,
-    fontWeight: "bold",
+    fontSize: 25,
+    fontWeight: "900",
     marginBottom: 10,
   },
   carouselItem: {
     alignItems: "center",
-    marginRight: 15,
+    marginRight: 1,
   },
   carouselImage: {
-    width: 70,
-    height: 70,
-    borderRadius: 50, 
+    width: 60,
+    height: 60,
+    borderRadius: 50,
     resizeMode: "cover",
   },
   carouselText: {
     marginTop: 5,
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: "bold",
   },
-  CarouelIcon:{
+  CarouelIcon: {
     alignItems: "center",
     justifyContent: "center",
     // paddingTop: 25,
-    height: 40,
-    marginTop:20,
-    padding:5,
-    backgroundColor: "rgba(0,0,0,0.5)",
-    
-  }
+    height: 30,
+    marginTop: 20,
+    padding: 5,
+    backgroundColor: "#10191f",
+  },
 });
