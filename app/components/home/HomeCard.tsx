@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { View, Image, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { Card, Button } from "react-native-paper";
+import { Card } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 
 type SareeCardProps = {
   id: number;
-  image: string;
+  image: string | number;
   name: string;
   price: string;
 };
@@ -21,27 +21,29 @@ export default function HomeCard({ id, image, name, price }: SareeCardProps) {
   };
 
   return (
-    <TouchableOpacity
-      style={styles.cardContainer}
-      onPress={handleCardClick}
-      // onMouseEnter={() => setHover(true)}
-      // onMouseLeave={() => setHover(false)}
-    >
+    <TouchableOpacity style={styles.cardContainer} onPress={handleCardClick}>
       <Card style={styles.card}>
-        <Image source={{ uri: image }} style={styles.image} />
+        {/* Image Container with onTouchStart & onTouchEnd to simulate hover */}
+        <View
+          onTouchStart={() => setHover(true)}
+          onTouchEnd={() => setHover(false)}
+          style={styles.imageContainer}
+        >
+          <Image
+            source={typeof image === "string" ? { uri: image } : image}
+            style={styles.image}
+          />
 
-        {hover && (
-          <View style={styles.overlay}>
-            <Button
-              mode="outlined"
-              icon="cart"
-              textColor="white"
-              style={styles.addToCartButton}
-            >
-              ADD TO CART
-            </Button>
-          </View>
-        )}
+          {/* Show "Add to Cart" when hover is true */}
+          {hover && (
+            <View style={styles.overlay}>
+              <TouchableOpacity style={styles.button}>
+                <MaterialIcons name="shopping-cart" size={20} color="white" />
+                <Text style={styles.buttonText}>ADD TO CART</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
 
         <Card.Content style={styles.cardContent}>
           <View style={styles.textRow}>
@@ -52,7 +54,7 @@ export default function HomeCard({ id, image, name, price }: SareeCardProps) {
           <View style={styles.ratingRow}>
             <View style={styles.starContainer}>
               {[...Array(5)].map((_, index) => (
-                <MaterialIcons key={index} name="star" size={24} color="gold" />
+                <MaterialIcons key={index} name="star" size={15} color="gold" />
               ))}
             </View>
             <Text style={styles.ratingText}>(1k)</Text>
@@ -65,45 +67,66 @@ export default function HomeCard({ id, image, name, price }: SareeCardProps) {
 
 const styles = StyleSheet.create({
   cardContainer: {
-    maxWidth: 350,
+    padding: 20,
+    maxWidth: 120,
     borderRadius: 8,
-    marginVertical: 10,
-    alignSelf: "center",
+    marginVertical: 5,
   },
   card: {
-    borderRadius: 8,
+    width: 160,
+    height: 290,
+    borderRadius: 5,
     overflow: "hidden",
   },
+  imageContainer: {
+    position: "relative",
+  },
   image: {
-    height: 20,
+    height: 180,
     width: "100%",
-    resizeMode: "cover",
     borderBottomWidth: 2,
     borderBottomColor: "#BC0320",
+    resizeMode: "cover",
   },
   overlay: {
     position: "absolute",
     bottom: 0,
     width: "100%",
-    backgroundColor: "#2B2017",
+    backgroundColor: "rgba(43, 32, 23, 0.9)", // Slight transparency
     padding: 10,
+    flexDirection: "row",
+    justifyContent: "center",
     alignItems: "center",
   },
-  addToCartButton: {
+  button: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
     borderColor: "white",
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 15,
+    marginLeft: 5,
   },
   cardContent: {
     backgroundColor: "#B10000",
     padding: 10,
+    width: "100%",
   },
   textRow: {
     flexDirection: "row",
     justifyContent: "space-between",
+    width: 100,
+    gap: 3,
   },
   name: {
     color: "white",
     fontWeight: "bold",
-    fontSize: 18,
+    fontSize: 10,
   },
   price: {
     color: "white",
@@ -112,6 +135,8 @@ const styles = StyleSheet.create({
   quality: {
     color: "#FBEFF1",
     marginTop: 10,
+    fontSize: 8,
+    fontWeight: "bold",
   },
   ratingRow: {
     flexDirection: "row",
@@ -126,5 +151,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 16,
     color: "white",
+    paddingRight: 30,
+
   },
 });

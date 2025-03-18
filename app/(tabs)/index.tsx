@@ -11,21 +11,33 @@ import {
   ScrollView,
 } from "react-native";
 
-import HomeScreens from "../components/home/HomeScreens";
 import Navbar from "../components/home/Navbar";
 import HomeContents from "../components/home/HomeContents";
 import HomeCard from "../components/home/HomeCard";
 
+
 const cardsarees = [
   {
     id: 1,
-    image: "/image/homeImg1.png",
+    image: require("../../assets/images/cardImg1.png"),
     name: "Elegant Red Silk Saree with Gold Border",
     price: "2,499",
   },
   {
     id: 1,
-    image: "/image/cardImg1.png",
+    image: require("../../assets/images/cardImg1.png"),
+    name: "Elegant Red Silk Saree with Gold Border",
+    price: "2,499",
+  },
+  {
+    id: 2,
+    image: require("../../assets/images/cardImg1.png"),
+    name: "Elegant Red Silk Saree with Gold Border",
+    price: "2,499",
+  },
+  {
+    id: 3,
+    image: require("../../assets/images/cardImg1.png"),
     name: "Elegant Red Silk Saree with Gold Border",
     price: "2,499",
   },
@@ -95,14 +107,82 @@ const LoginScreen = () => {
             </ScrollView>
           </View>
 
-          {cardsarees.map((saree, index) => (
-            <HomeCard
-              id={saree.id}
-              image={saree.image}
-              name={saree.name}
-              price={saree.price}
-            />
-          ))}
+          {/* card Section */}
+
+          <View style={styles.cardSection}>
+            <Text style={styles.CardTile}>New</Text>
+            <Text style={styles.cardRightTile}>View all</Text>
+          </View>
+
+          <Text style={styles.cardSubSection}>
+            You've never seen it before!
+          </Text>
+           
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.Cardcontainer}>
+              {cardsarees.map((saree) => (
+                <HomeCard
+                  key={saree.id}
+                  id={saree.id}
+                  image={saree.image}
+                  name={saree.name}
+                  price={saree.price}
+                />
+              ))}
+          </ScrollView>
+          
+
+          <View style={styles.container}>
+            <HomeContents />
+          </View>
+          {/* Shop Carousel  container */}
+
+          <View style={styles.shopSection}>
+            <Text style={styles.shopTitle}>Shop</Text>
+
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              <AntDesign
+                name="left"
+                size={15}
+                color="white"
+                style={styles.CarouelIcon}
+              />
+
+              <View style={styles.carouselItem}>
+                <Image
+                  style={styles.carouselImage}
+                  source={require("../../assets/images/homeCarouselImg1.png")}
+                />
+                <Text style={styles.carouselText}>Banarasi</Text>
+              </View>
+              <View style={styles.carouselItem}>
+                <Image
+                  style={styles.carouselImage}
+                  source={require("../../assets/images/homeCarouselImg2.png")}
+                />
+                <Text style={styles.carouselText}>Kanchipuram</Text>
+              </View>
+              <View style={styles.carouselItem}>
+                <Image
+                  style={styles.carouselImage}
+                  source={require("../../assets/images/homeCarouselImg3.png")}
+                />
+                <Text style={styles.carouselText}>Chettinad</Text>
+              </View>
+              <View style={styles.carouselItem}>
+                <Image
+                  style={styles.carouselImage}
+                  source={require("../../assets/images/homeCarouselImg4.png")}
+                />
+                <Text style={styles.carouselText}>Kumbakon</Text>
+              </View>
+              <AntDesign
+                name="right"
+                size={15}
+                color="white"
+                style={styles.CarouelIcon}
+              />
+            </ScrollView>
+          </View>
         </KeyboardAvoidingView>
       </ScrollView>
     </View>
@@ -144,13 +224,35 @@ const styles = StyleSheet.create({
 
   // Carousel Section
   shopSection: {
-    marginTop: 20,
-    paddingHorizontal: 30,
+    marginTop: 25,
+    paddingHorizontal: 25,
+    // flexDirection:"row",
+    justifyContent: "space-between",
   },
   shopTitle: {
     fontSize: 25,
     fontWeight: "900",
     marginBottom: 10,
+  },
+  cardSection: {
+    marginTop: 30,
+    paddingHorizontal: 25,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  CardTile: {
+    fontSize: 25,
+    fontWeight: "900",
+    marginBottom: 10,
+  },
+  cardRightTile: {
+    fontSize: 15,
+    color: "#968386",
+  },
+  cardSubSection: {
+    padding: 5,
+    paddingLeft: 22,
+    color: "#968386",
   },
   carouselItem: {
     alignItems: "center",
@@ -175,5 +277,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
     padding: 5,
     backgroundColor: "#10191f",
+  },
+  Cardcontainer: {
+    flexDirection: "row",
+    flexWrap: "wrap", 
+    justifyContent: "space-between", 
+    padding: 10,
+    gap: 60
   },
 });
