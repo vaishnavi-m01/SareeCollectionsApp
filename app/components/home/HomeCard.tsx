@@ -67,14 +67,17 @@ export default function HomeCard({ id, image, name, price }: SareeCardProps) {
 
 const styles = StyleSheet.create({
   cardContainer: {
-    padding: 20,
-    maxWidth: 120,
+    padding: 10,
+    maxWidth: 110,
     borderRadius: 8,
-    marginVertical: 5,
+    marginVertical: 10,
   },
   card: {
+    overflowX: "hidden",
+    overflowY: "hidden",
+
     width: 160,
-    height: 290,
+    height: 260,
     borderRadius: 5,
     overflow: "hidden",
   },
@@ -82,7 +85,7 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   image: {
-    height: 180,
+    height: 150,
     width: "100%",
     borderBottomWidth: 2,
     borderBottomColor: "#BC0320",
@@ -92,7 +95,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     width: "100%",
-    backgroundColor: "rgba(43, 32, 23, 0.9)", // Slight transparency
+    backgroundColor: "rgba(43, 32, 23, 0.9)", 
     padding: 10,
     flexDirection: "row",
     justifyContent: "center",
@@ -109,7 +112,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "white",
-    fontSize: 15,
+    fontSize: 12,
     marginLeft: 5,
   },
   cardContent: {
@@ -130,7 +133,7 @@ const styles = StyleSheet.create({
   },
   price: {
     color: "white",
-    fontWeight: "bold",
+    fontWeight: 900,
   },
   quality: {
     color: "#FBEFF1",
@@ -151,7 +154,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 16,
     color: "white",
-    paddingRight: 30,
+   
 
   },
 });
