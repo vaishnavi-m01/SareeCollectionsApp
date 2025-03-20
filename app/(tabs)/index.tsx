@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Text, View, StyleSheet, ScrollView, Image, TouchableOpacity } from "react-native";
 import Navbar from "../components/home/Navbar";
 import HomeContents from "../components/home/HomeContents";
 import HomeCard from "../components/home/HomeCard";
 import { AntDesign } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import SareeCarousel from "../components/home/SareeCarousel";
 
 const cardsarees = [
   {
@@ -35,12 +36,21 @@ const cardsarees = [
 
 const HomeScreen = () => {
 
-    const router = useRouter();
-    const handleRegister = () => {
-      router.replace("/shop"); // Navigate to the main app
-    };
-  
-  
+  const router = useRouter();
+  const scrollRef = useRef<ScrollView>(null);
+
+  const handleRegister = () => {
+    router.replace("/shop"); // Navigate to the main app
+  };
+
+  const handleScroll = (direction: "left" | "right") => {
+    scrollRef.current?.scrollTo({
+      x: direction === "right" ? 200 : -200, // Moves right or left
+      animated: true,
+    });
+  };
+
+
   return (
     <View style={styles.container}>
       {/* Navbar */}
@@ -57,15 +67,12 @@ const HomeScreen = () => {
         {/* Carousel Section */}
         <View style={styles.shopSection}>
           <Text style={styles.shopTitle}>Shop</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <AntDesign
-              name="left"
-              size={15}
-              color="white"
-              style={styles.CarouselIcon}
-            />
+          {/* <View style={styles.carouselRounded}>
+            <TouchableOpacity onPress={() => handleScroll("left")}>
+              <AntDesign name="left" size={15} color="white" style={styles.CarouselIcon} />
+            </TouchableOpacity>
             <TouchableOpacity style={styles.carouselItem} onPress={handleRegister} >
-              <Image 
+              <Image
                 style={styles.carouselImage}
                 source={require("../../assets/images/homeCarouselImg1.png")}
               />
@@ -92,13 +99,26 @@ const HomeScreen = () => {
               />
               <Text style={styles.carouselText}>Banarasi</Text>
             </View>
-            <AntDesign
-              name="right"
-              size={15}
-              color="white"
-              style={styles.CarouselIcon}
-            />
-          </ScrollView>
+            <TouchableOpacity onPress={() => handleScroll("right")}>
+              <AntDesign name="right" size={15} color="white" style={styles.CarouselIcon} />
+            </TouchableOpacity>
+            <View style={styles.carouselItem}>
+              <Image 
+                style={styles.carouselImage}
+                source={require("../../assets/images/homeCarouselImg1.png")}
+              />
+              <Text style={styles.carouselText}>Banarasi</Text>
+            </View>
+            <View style={styles.carouselItem}>
+              <Image
+                style={styles.carouselImage}
+                source={require("../../assets/images/homeCarouselImg1.png")}
+              />
+              <Text style={styles.carouselText}>Banarasi</Text>
+            </View>
+          </View> */}
+          <SareeCarousel></SareeCarousel>
+
         </View>
 
         {/* Cards Section */}
@@ -143,12 +163,13 @@ const styles = StyleSheet.create({
   },
   shopSection: {
     marginTop: 25,
-    paddingHorizontal: 25,
+    paddingHorizontal: 5,
   },
   shopTitle: {
     fontSize: 25,
     fontWeight: "900",
     marginBottom: 10,
+    marginLeft: 25
   },
   cardSection: {
     marginTop: 30,
@@ -175,6 +196,12 @@ const styles = StyleSheet.create({
     gap: 60,
     paddingHorizontal: 10,
   },
+
+  carouselRounded: {
+    flexDirection: "row"
+
+
+  },
   carouselItem: {
     alignItems: "center",
     marginRight: 1,
@@ -197,5 +224,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     padding: 5,
     backgroundColor: "#10191f",
+    marginRight: 5,
+    marginLeft: 5
   },
 });

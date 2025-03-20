@@ -3,7 +3,7 @@ import { View, StyleSheet, Animated, TouchableOpacity, Dimensions } from "react-
 import AntDesign from "@expo/vector-icons/AntDesign";
 import HomeSection from "./HomeSection";
 
-const { width } = Dimensions.get("window"); // Get screen width
+const { width } = Dimensions.get("window");     
 
 const homeData = [
     {
