@@ -40,7 +40,7 @@ const cardsarees = [
   },
 ];
 
-export default function BanarasiPage() {
+export default function KumbakonamPage() {
   return (
     <View style={styles.container}>
       <FlatList

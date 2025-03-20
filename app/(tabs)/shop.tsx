@@ -1,144 +1,168 @@
-import { useRouter } from "expo-router";
-import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  KeyboardAvoidingView,
-  Platform,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from "react-native";
+import { View, FlatList, StyleSheet,Text } from "react-native";
+import HomeCard from "../components/home/HomeCard";
+import { Ionicons } from "@expo/vector-icons";
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
-const Shop = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
-  const router = useRouter();
+const cardsarees = [
+  {
+    id: 1,
+    image: require("../../assets/images/cardImg1.png"),
+    name: "Elegant Red Silk Saree with Gold Border",
+    price: "2,499",
+  },
+  {
+    id: 2,
+    image: require("../../assets/images/cardImg2.png"),
+    name: "Elegant Red Silk Saree with Gold Border",
+    price: "2,499",
+  },
+  {
+    id: 3,
+    image: require("../../assets/images/cardImg3.png"),
+    name: "Elegant Red Silk Saree with Gold Border",
+    price: "2,499",
+  },
+  {
+    id: 4,
+    image: require("../../assets/images/cardImg4.png"),
+    name: "Elegant Red Silk Saree with Gold Border",
+    price: "2,499",
+  },
+  {
+    id: 3,
+    image: require("../../assets/images/cardImg1.png"),
+    name: "Elegant Red Silk Saree with Gold Border",
+    price: "2,499",
+  },
+  {
+    id: 4,
+    image: require("../../assets/images/cardImg2.png"),
+    name: "Elegant Red Silk Saree with Gold Border",
+    price: "2,499",
+  },
+];
 
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener("keyboardDidShow", () =>
-      setKeyboardVisible(true)
-    );
-    const keyboardDidHideListener = Keyboard.addListener("keyboardDidHide", () =>
-      setKeyboardVisible(false)
-    );
-
-    return () => {
-      keyboardDidShowListener.remove();
-      keyboardDidHideListener.remove();
-    };
-  }, []);
-
-  const handleRegister = () => {
-    router.replace("/(tabs)"); // Navigate to the main app
-  };
-
+export default function Shop() {
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
-    >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.inner}>
-          <Text style={styles.title}>Register</Text>
-
-          <TextInput
-            style={styles.input}
-            placeholder="Name"
-            placeholderTextColor="#888"
-            value={name}
-            onChangeText={setName}
-          />
-
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            placeholderTextColor="#888"
-            keyboardType="email-address"
-            value={email}
-            onChangeText={setEmail}
-          />
-
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            placeholderTextColor="#888"
-            secureTextEntry
-            value={password}
-            onChangeText={setPassword}
-          />
-
-          <TouchableOpacity style={styles.button} onPress={handleRegister}>
-            <Text style={styles.buttonText}>Register</Text>
-          </TouchableOpacity>
-
+      <View style={styles.container}>
+        <View style={styles.homeTitle}>
+        <Text style={styles.title}>
+          <Ionicons name="cart" size={30} /> Kite Fashion
+        </Text>
         </View>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+        <View style={styles.shopContent}>
+          <Text style={styles.shopTitle}>Saree List</Text>
+          <Text style={styles.subTitle}> Filter
+          <MaterialCommunityIcons name="filter-variant" size={25} color="black" /> 
+        </Text>
+        </View>
+        <FlatList
+          data={cardsarees}
+          keyExtractor={(item) => item.id.toString()}
+          numColumns={2} // Display 2 cards per row
+          renderItem={({ item }) => (
+            <View style={styles.cardWrapper}>
+              <HomeCard
+                id={item.id}
+                image={item.image}
+                name={item.name}
+                price={item.price}
+              />
+            </View>
+          )}
+          contentContainerStyle={styles.listContainer}
+        />
+      </View>
   );
-};
-
-export default Shop;
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f8f8f8",
+    paddingHorizontal: 10,
+    paddingTop: 20,
   },
-  inner: {
+  listContainer: {
+    gap: 0,
+  },
+  cardWrapper: {
     flex: 1,
-    justifyContent: "center",
+    backgroundColor: "#fce6e9"
+
+  },
+  homeTitle: {
+    textAlign: "center",
     alignItems: "center",
-    paddingHorizontal: 20,
+    padding: 20,
   },
   title: {
-    fontSize: 28,
-    fontWeight: "bold",
-    marginBottom: 20,
-    color: "#333",
-  },
-  input: {
-    width: "100%",
-    height: 50,
-    borderColor: "#ccc",
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingHorizontal: 15,
-    marginBottom: 15,
-    fontSize: 16,
-    backgroundColor: "#fff",
-  },
-  button: {
-    backgroundColor: "#007bff",
-    paddingVertical: 12,
-    paddingHorizontal: 30,
-    borderRadius: 10,
-    width: "100%",
-    alignItems: "center",
-    marginBottom: 10,
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  fixedTabs: {
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
-    height: 60,
-    backgroundColor: "#007bff",
-    justifyContent: "center",
+    fontSize: 19,
+    fontWeight: "800",
+    color: "#10191e",
+    flexDirection: "row",
     alignItems: "center",
   },
-  tabText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
+  subTitle:{
+    fontSize: 19,
+    color: "#10191e",
+    fontWeight: 600,
+    flexDirection: "row",
+    alignItems: "center",
   },
+  shopContent:{
+    display:"flex",
+    justifyContent:"space-between",
+    flexDirection: "row",
+    backgroundColor: "white",
+    padding:10,
+  },
+  shopTitle:{
+    fontSize: 22,
+    color: "#071518",
+    fontWeight: 900,
+    marginHorizontal: 10
+  }    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+ 
 });

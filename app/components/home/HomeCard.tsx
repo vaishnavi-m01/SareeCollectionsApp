@@ -3,6 +3,7 @@ import { View, Image, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Card } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 
 type SareeCardProps = {
   id: number;
@@ -12,12 +13,12 @@ type SareeCardProps = {
 };
 
 export default function HomeCard({ id, image, name, price }: SareeCardProps) {
-  const navigation = useNavigation();
+  const router = useRouter();
   const [hover, setHover] = useState(false);
 
   const handleCardClick = () => {
     console.log("Data", id);
-    navigation.navigate("shop" as never);
+    router.replace("/shop"); 
   };
 
   return (

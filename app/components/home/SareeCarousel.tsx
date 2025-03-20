@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 import { View, Image, Text, TouchableOpacity, ScrollView, StyleSheet } from "react-native";
-import { useRouter } from "expo-router";
+import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 
 const sarees = [
-  { id: 1, image: require("../../../assets/images/homeCarouselImg1.png"), name: "Banarasi", screen: "/banarasi" },
-  { id: 2, image: require("../../../assets/images/homeCarouselImg2.png"), name: "Kanchipuram", screen: "/kanchipuram" },
-  { id: 3, image: require("../../../assets/images/homeCarouselImg3.png"), name: "Chettinad", screen: "/chettinad" },
-  { id: 4, image: require("../../../assets/images/homeCarouselImg4.png"), name: "Kumbakonam", screen: "/kumbakonam" },
+  { id: 1, image: require("../../../assets/images/homeCarouselImg1.png"), name: "Banarasi" },
+  { id: 2, image: require("../../../assets/images/homeCarouselImg2.png"), name: "Kanchipuram" },
+  { id: 3, image: require("../../../assets/images/homeCarouselImg3.png"), name: "Chettinad" },
+  { id: 4, image: require("../../../assets/images/homeCarouselImg4.png"), name: "Kumbakonam" },
 ];
 
 const SareeCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerView = 3;
   const maxIndex = sarees.length - itemsPerView;
+  const navigation = useNavigation();
 
-  const router = useRouter();
-
+  
   const nextSlide = () => {
     if (currentIndex < maxIndex) {
       setCurrentIndex(currentIndex + 1);
@@ -29,8 +29,23 @@ const SareeCarousel = () => {
     }
   };
 
-  const handleImageClick = (saree:any) => {
-    router.push(saree.screen);
+  const handleImageClick = (sareeName: string) => {
+    switch (sareeName) {
+      case "Banarasi":
+        navigation.navigate("Banarasi" as never);
+        break;
+      case "Kanchipuram":
+        navigation.navigate("Kanchipuram" as never);
+        break;
+      case "Chettinad":
+        navigation.navigate("Chettinad" as never);
+        break;
+      case "Kumbakonam":
+        navigation.navigate("Kumbakonam" as never);
+        break;
+      default:
+        console.warn("No screen available for this saree.");
+    }
   };
 
   return (
@@ -51,7 +66,7 @@ const SareeCarousel = () => {
       >
         {sarees.slice(currentIndex, currentIndex + itemsPerView).map((item) => (
           <View key={item.id} style={styles.cardContainer}>
-            <TouchableOpacity onPress={() => handleImageClick(item)}>
+            <TouchableOpacity onPress={() => handleImageClick(item.name)}>
               <View style={styles.card}>
                 <Image source={item.image} style={styles.image} />
               </View>

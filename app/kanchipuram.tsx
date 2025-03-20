@@ -1,16 +1,74 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, FlatList, StyleSheet } from "react-native";
+import HomeCard from "./components/home/HomeCard";
 
-export default function kanchipuramPage() {
+const cardsarees = [
+  {
+    id: 1,
+    image: require("../assets/images/cardImg1.png"),
+    name: "Elegant Red Silk Saree with Gold Border",
+    price: "2,499",
+  },
+  {
+    id: 2,
+    image: require("../assets/images/cardImg2.png"),
+    name: "Elegant Red Silk Saree with Gold Border",
+    price: "2,499",
+  },
+  {
+    id: 3,
+    image: require("../assets/images/cardImg3.png"),
+    name: "Elegant Red Silk Saree with Gold Border",
+    price: "2,499",
+  },
+  {
+    id: 4,
+    image: require("../assets/images/cardImg4.png"),
+    name: "Elegant Red Silk Saree with Gold Border",
+    price: "2,499",
+  },
+  {
+    id: 3,
+    image: require("../assets/images/cardImg1.png"),
+    name: "Elegant Red Silk Saree with Gold Border",
+    price: "2,499",
+  },
+  {
+    id: 4,
+    image: require("../assets/images/cardImg2.png"),
+    name: "Elegant Red Silk Saree with Gold Border",
+    price: "2,499",
+  },
+];
+
+export default function KanchipuramPage() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Banarasi Saree</Text>
-      <Image source={require("../assets/images/homeCarouselImg1.png")} style={styles.image} />
+      <FlatList
+        data={cardsarees}
+        keyExtractor={(item) => item.id.toString()}
+        numColumns={2} // Display 2 cards per row
+        renderItem={({ item }) => (
+          <View style={styles.cardWrapper}>
+            <HomeCard id={item.id} image={item.image} name={item.name} price={item.price} />
+          </View>
+        )}
+        contentContainerStyle={styles.listContainer}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "#fff" },
-  title: { fontSize: 22, fontWeight: "bold", marginBottom: 10 },
-  image: { width: 200, height: 200, borderRadius: 10 },
+  container: {
+    flex: 1,
+    paddingHorizontal: 10,
+    paddingTop: 20,
+  },
+  listContainer: {
+    gap: 0, 
+  },
+  cardWrapper: {
+    flex: 1,
+  },
 });
+

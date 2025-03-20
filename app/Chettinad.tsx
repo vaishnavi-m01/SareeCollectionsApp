@@ -40,7 +40,7 @@ const cardsarees = [
   },
 ];
 
-export default function BanarasiPage() {
+export default function ChettinadPage() {
   return (
     <View style={styles.container}>
       <FlatList
