@@ -46,7 +46,7 @@ export default function KanchipuramPage() {
       <FlatList
         data={cardsarees}
         keyExtractor={(item) => item.id.toString()}
-        numColumns={2} // Display 2 cards per row
+        numColumns={2} 
         renderItem={({ item }) => (
           <View style={styles.cardWrapper}>
             <HomeCard id={item.id} image={item.image} name={item.name} price={item.price} />
