@@ -11,7 +11,7 @@ const WelcomePage = () => {
     <View style={style.container}>
       <Text style={style.title}>React Native Card</Text>
       <TouchableOpacity style={style.button} onPress={handleRegister}> Register
-        {/* <Text style={style.buttonText}>Register</Text> */}
+        <Text style={style.buttonText}>Register</Text>
       </TouchableOpacity>
     </View>
   );
@@ -32,8 +32,9 @@ const style = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 30,
     borderRadius: 10,
-    width: "100%",
+    width: "80%",
     alignItems: "center",
+    marginTop: 10
   },
   buttonText: {
     color: "#fff",
