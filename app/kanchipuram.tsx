@@ -27,13 +27,13 @@ const cardsarees = [
     price: "2,499",
   },
   {
-    id: 3,
+    id: 5, // Changed to avoid duplicate key
     image: require("../assets/images/cardImg1.png"),
     name: "Elegant Red Silk Saree with Gold Border",
     price: "2,499",
   },
   {
-    id: 4,
+    id: 6, // Changed to avoid duplicate key
     image: require("../assets/images/cardImg2.png"),
     name: "Elegant Red Silk Saree with Gold Border",
     price: "2,499",
@@ -45,8 +45,8 @@ export default function KanchipuramPage() {
     <View style={styles.container}>
       <FlatList
         data={cardsarees}
-        keyExtractor={(item) => item.id.toString()}
-        numColumns={2} 
+        keyExtractor={(item) => item.id.toString()} // Ensure unique key
+        numColumns={2}
         renderItem={({ item }) => (
           <View style={styles.cardWrapper}>
             <HomeCard id={item.id} image={item.image} name={item.name} price={item.price} />
@@ -65,10 +65,9 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   listContainer: {
-    gap: 0, 
+    gap: 0,
   },
   cardWrapper: {
     flex: 1,
   },
 });
-

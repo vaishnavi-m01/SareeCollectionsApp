@@ -10,7 +10,7 @@ const WelcomePage = () => {
   return (
     <View style={style.container}>
       <Text style={style.title}>React Native Card</Text>
-      <TouchableOpacity style={style.button} onPress={handleRegister}> Register
+      <TouchableOpacity style={style.button} onPress={handleRegister}> 
         <Text style={style.buttonText}>Register</Text>
       </TouchableOpacity>
     </View>

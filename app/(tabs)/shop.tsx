@@ -59,8 +59,8 @@ export default function Shop() {
         </View>
         <FlatList
           data={cardsarees}
-          keyExtractor={(item) => item.id.toString()}
-          numColumns={2} // Display 2 cards per row
+          keyExtractor={(item,index) => item.id.toString()}
+          numColumns={2} 
           renderItem={({ item }) => (
             <View style={styles.cardWrapper}>
               <HomeCard

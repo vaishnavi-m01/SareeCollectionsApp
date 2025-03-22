@@ -1,5 +1,12 @@
 import React, { useRef } from "react";
-import { Text, View, StyleSheet, ScrollView, Image, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import Navbar from "../components/home/Navbar";
 import HomeContents from "../components/home/HomeContents";
 import HomeCard from "../components/home/HomeCard";
@@ -35,7 +42,6 @@ const cardsarees = [
 ];
 
 const HomeScreen = () => {
-
   const router = useRouter();
   const scrollRef = useRef<ScrollView>(null);
 
@@ -49,7 +55,6 @@ const HomeScreen = () => {
       animated: true,
     });
   };
-
 
   return (
     <View style={styles.container}>
@@ -67,58 +72,7 @@ const HomeScreen = () => {
         {/* Carousel Section */}
         <View style={styles.shopSection}>
           <Text style={styles.shopTitle}>Shop</Text>
-          {/* <View style={styles.carouselRounded}>
-            <TouchableOpacity onPress={() => handleScroll("left")}>
-              <AntDesign name="left" size={15} color="white" style={styles.CarouselIcon} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.carouselItem} onPress={handleRegister} >
-              <Image
-                style={styles.carouselImage}
-                source={require("../../assets/images/homeCarouselImg1.png")}
-              />
-              <Text style={styles.carouselText}>Banarasi</Text>
-            </TouchableOpacity>
-            <View style={styles.carouselItem}>
-              <Image
-                style={styles.carouselImage}
-                source={require("../../assets/images/homeCarouselImg1.png")}
-              />
-              <Text style={styles.carouselText}>Banarasi</Text>
-            </View>
-            <View style={styles.carouselItem}>
-              <Image
-                style={styles.carouselImage}
-                source={require("../../assets/images/homeCarouselImg1.png")}
-              />
-              <Text style={styles.carouselText}>Banarasi</Text>
-            </View>
-            <View style={styles.carouselItem}>
-              <Image
-                style={styles.carouselImage}
-                source={require("../../assets/images/homeCarouselImg1.png")}
-              />
-              <Text style={styles.carouselText}>Banarasi</Text>
-            </View>
-            <TouchableOpacity onPress={() => handleScroll("right")}>
-              <AntDesign name="right" size={15} color="white" style={styles.CarouselIcon} />
-            </TouchableOpacity>
-            <View style={styles.carouselItem}>
-              <Image 
-                style={styles.carouselImage}
-                source={require("../../assets/images/homeCarouselImg1.png")}
-              />
-              <Text style={styles.carouselText}>Banarasi</Text>
-            </View>
-            <View style={styles.carouselItem}>
-              <Image
-                style={styles.carouselImage}
-                source={require("../../assets/images/homeCarouselImg1.png")}
-              />
-              <Text style={styles.carouselText}>Banarasi</Text>
-            </View>
-          </View> */}
-          <SareeCarousel></SareeCarousel>
-
+          <SareeCarousel />
         </View>
 
         {/* Cards Section */}
@@ -169,7 +123,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "900",
     marginBottom: 10,
-    marginLeft: 25
+    marginLeft: 25,
   },
   cardSection: {
     marginTop: 30,
@@ -198,9 +152,7 @@ const styles = StyleSheet.create({
   },
 
   carouselRounded: {
-    flexDirection: "row"
-
-
+    flexDirection: "row",
   },
   carouselItem: {
     alignItems: "center",
@@ -225,6 +177,6 @@ const styles = StyleSheet.create({
     padding: 5,
     backgroundColor: "#10191f",
     marginRight: 5,
-    marginLeft: 5
+    marginLeft: 5,
   },
 });
